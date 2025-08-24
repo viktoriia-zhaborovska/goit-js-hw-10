@@ -91,18 +91,17 @@ refs.dataStart.addEventListener('click', () => {
   const end = userSelectedDate.getTime();
   let i = Math.floor((end - todayMs) / 1000);
   refs.intervalId = setInterval(function () {
+  if (i > 0) {
+    timeCount();
     i--;
-    if (i > 0) {
-      timeCount();
-    } else {
-      Array.from(refs.dataPoints).forEach(datapoint => {
-        datapoint.textContent = "00"
-        })
-        clearInterval(refs.intervalId);
-        refs.dateTimePicker.disabled = false;
-    }
-  }, 1000);
-});
+  } else {
+    Array.from(refs.dataPoints).forEach(datapoint => {
+      datapoint.textContent = "00"
+    })
+    clearInterval(refs.intervalId);
+    refs.dateTimePicker.disabled = false;
+  }
+}, 1000);})
 
 
 
